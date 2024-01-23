@@ -1,0 +1,45 @@
+<div class="header">
+  <h1>Space Technology Students' Society (spAts) Job Portal</h1>
+</div>
+
+<div class="container">
+  <div class="upload-container">
+    <h2>Add Job Profiles</h2>
+    <label for="jobType">Job Type:</label>
+    <select id="jobType" [(ngModel)]="selectedJobType">
+      <option value="internship">Internship</option>
+      <option value="job">Job</option>
+      <option value="contract">Contract</option>
+    </select>
+<br>
+    <label for="jobDescription">Job Description:</label>
+    <textarea id="jobDescription" [(ngModel)]="jobDescription"></textarea>
+<br>
+    <label for="stipend">Salary/Stipend:</label>
+    <input type="text" id="stipend" [(ngModel)]="stipend" />
+    <br><br><br>
+    <h6><button class="upload-button" (click)="uploadJob()">Upload</button></h6>
+  </div>
+</div>
+
+<div class="container">
+  <div class="fetch-container">
+    <h2>Job Profiles</h2>
+    <div class="filter-buttons">
+      <button (click)="toggleFilter('internship')" [class.active]="isFilterActive('internship')">Intern</button>
+      <button (click)="toggleFilter('job')" [class.active]="isFilterActive('job')">Job</button>
+      <button (click)="toggleFilter('contract')" [class.active]="isFilterActive('contract')">Contract</button>
+    </div>
+
+    <div class="job-profiles" *ngFor="let job of filteredJobs">
+      
+      <div class="job-details">
+        <p>{{ job.description }}</p>
+      </div>
+      <div class="job-details">
+        <h3>{{ job.type }}</h3>
+        <p *ngIf="job.stipend">Stipend: Rs.{{ job.stipend }}/- per month</p>
+      </div>
+    </div>
+  </div>
+</div>
